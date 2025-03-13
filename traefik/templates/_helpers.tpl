@@ -93,6 +93,32 @@ are multiple namespaced releases with the same release name.
 {{- end -}}
 
 {{/*
+Change input to a valid name for a port.
+This is a best effort to convert input to a valid port name,
+which only allows lowercase alphanumeric characters and '-',
+and imposes limits on the lenght of the name.
+See also https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.32/#containerport-v1-core.
+*/}}
+{{- define "traefik.portname" -}}
+{{- $portName := . -}}
+{{- $portName = $portName | lower -}}
+{{- $portName = $portName | trunc 15 | trimSuffix "-" -}}
+{{- print $portName -}}
+{{- end -}}
+
+{{/*
+Change input to a valid port reference.
+See also the traefik.portname helper.
+*/}}
+{{- define "traefik.portreference" -}}
+{{- if kindIs "string" . -}}
+    {{- print (include "traefik.portname" .) -}}
+{{- else -}}
+    {{- print . -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
 Construct the path for the providers.kubernetesingress.ingressendpoint.publishedservice.
 By convention this will simply use the <namespace>/<service-name> to match the name of the
 service generated.
