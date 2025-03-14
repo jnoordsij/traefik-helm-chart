@@ -96,7 +96,7 @@ are multiple namespaced releases with the same release name.
 Change input to a valid name for a port.
 This is a best effort to convert input to a valid port name,
 which only allows lowercase alphanumeric characters and '-',
-and imposes limits on the lenght of the name.
+and imposes limits on the length of the name.
 See also https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.32/#containerport-v1-core.
 */}}
 {{- define "traefik.portname" -}}
