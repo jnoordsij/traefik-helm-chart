@@ -375,7 +375,7 @@
           {{- end }}
 
           {{- if .Values.tracing.addInternals }}
-          - "--tracing.addinternals"
+          - "--tracing.addInternals"
           {{- end }}
 
           {{- with .Values.tracing }}

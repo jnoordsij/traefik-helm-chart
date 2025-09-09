@@ -51,7 +51,7 @@ tests:
     asserts:
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--tracing.addinternals"
+          content: "--tracing.addInternals"
       - contains:
           path: spec.template.spec.containers[0].args
           content: "--tracing.sampleRate=0.5"
