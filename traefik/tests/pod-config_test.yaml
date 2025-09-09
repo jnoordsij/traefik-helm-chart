@@ -342,10 +342,10 @@ tests:
     asserts:
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetescrd"
+          content: "--providers.kubernetesCRD"
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetesingress"
+          content: "--providers.kubernetesIngress"
       - contains:
           path: spec.template.spec.containers[0].args
           content: "--providers.kubernetesgateway"
@@ -947,7 +947,7 @@ tests:
     asserts:
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetescrd.allowEmptyServices=true"
+          content: "--providers.kubernetesCRD.allowEmptyServices=true"
   - it: should unset allowEmptyServices for kubernetesCRD
     set:
       providers:
@@ -956,7 +956,7 @@ tests:
     asserts:
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetescrd.allowEmptyServices=false"
+          content: "--providers.kubernetesCRD.allowEmptyServices=false"
   - it: should set allowEmptyServices for kubernetesIngress
     set:
       providers:
@@ -965,7 +965,7 @@ tests:
     asserts:
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetesingress.allowEmptyServices=true"
+          content: "--providers.kubernetesIngress.allowEmptyServices=true"
   - it: should unset allowEmptyServices for kubernetesIngress
     set:
       providers:
@@ -974,7 +974,7 @@ tests:
     asserts:
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetesingress.allowEmptyServices=false"
+          content: "--providers.kubernetesIngress.allowEmptyServices=false"
   - it: should drop utc and set TZ env when access log timezone is set
     set:
       logs:

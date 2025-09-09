@@ -18,10 +18,10 @@ tests:
     asserts:
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetesingress.namespaces=NAMESPACE"
+          content: "--providers.kubernetesIngress.namespaces=NAMESPACE"
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetescrd.namespaces=NAMESPACE"
+          content: "--providers.kubernetesCRD.namespaces=NAMESPACE"
   - it: should have a custom string of watched namespaces when specified in configuration
     set:
       rbac:
@@ -41,13 +41,13 @@ tests:
     asserts:
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetesingress.namespaces=foo,bar"
+          content: "--providers.kubernetesIngress.namespaces=foo,bar"
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetescrd.allowCrossNamespace=true"
+          content: "--providers.kubernetesCRD.allowCrossNamespace=true"
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetescrd.namespaces=foo,bar"
+          content: "--providers.kubernetesCRD.namespaces=foo,bar"
   - it: should not have the watched namespace when provider is disabled
     set:
       providers:
@@ -64,28 +64,28 @@ tests:
     asserts:
       - notContains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetesingress.namespaces"
+          content: "--providers.kubernetesIngress.namespaces"
       - notContains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetesingress"
+          content: "--providers.kubernetesIngress"
       - notContains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetescrd.namespaces"
+          content: "--providers.kubernetesCRD.namespaces"
       - notContains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetescrd"
+          content: "--providers.kubernetesCRD"
   - it: should have enabled published Kubernetes service when default configuration
     asserts:
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetesingress.ingressendpoint.publishedservice=NAMESPACE/RELEASE-NAME-traefik"
+          content: "--providers.kubernetesIngress.ingressEndpoint.publishedService=NAMESPACE/RELEASE-NAME-traefik"
   - it: should use override namespace when specified
     set:
       namespaceOverride: foo
     asserts:
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetesingress.ingressendpoint.publishedservice=foo/RELEASE-NAME-traefik"
+          content: "--providers.kubernetesIngress.ingressEndpoint.publishedService=foo/RELEASE-NAME-traefik"
   - it: should be possible to disable published Kubernetes service when specified in configuration
     set:
       providers:
@@ -95,7 +95,7 @@ tests:
     asserts:
       - notContains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetesingress.ingressendpoint.publishedservice=NAMESPACE/RELEASE-NAME-traefik"
+          content: "--providers.kubernetesIngress.ingressEndpoint.publishedService=NAMESPACE/RELEASE-NAME-traefik"
   - it: should have a custom string in published Kubernetes service when specified in configuration
     set:
       providers:
@@ -106,7 +106,7 @@ tests:
     asserts:
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetesingress.ingressendpoint.publishedservice=foo/bar"
+          content: "--providers.kubernetesIngress.ingressEndpoint.publishedService=foo/bar"
   - it: should not set default publishedService when service is disabled
     set:
       service:
@@ -114,7 +114,7 @@ tests:
     asserts:
       - notContains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetesingress.ingressendpoint.publishedservice=NAMESPACE/RELEASE-NAME-traefik"
+          content: "--providers.kubernetesIngress.ingressEndpoint.publishedService=NAMESPACE/RELEASE-NAME-traefik"
   - it: should not set default statusAddress when service is disabled
     set:
       service:
@@ -176,7 +176,7 @@ tests:
     asserts:
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetescrd.allowCrossNamespace=true"
+          content: "--providers.kubernetesCRD.allowCrossNamespace=true"
   - it: should allow external name services when specified in configuration
     set:
       providers:
@@ -187,10 +187,10 @@ tests:
     asserts:
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetescrd.allowExternalNameServices=true"
+          content: "--providers.kubernetesCRD.allowExternalNameServices=true"
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetesingress.allowExternalNameServices=true"
+          content: "--providers.kubernetesIngress.allowExternalNameServices=true"
   - it: should allow empty services when specified in configuration
     set:
       providers:
@@ -201,10 +201,10 @@ tests:
     asserts:
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetesingress.allowEmptyServices=true"
+          content: "--providers.kubernetesIngress.allowEmptyServices=true"
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetescrd.allowEmptyServices=true"
+          content: "--providers.kubernetesCRD.allowEmptyServices=true"
   - it: should match ingresses based on input label
     set:
       providers:
@@ -215,10 +215,10 @@ tests:
     asserts:
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetesingress.labelSelector=environment=devel"
+          content: "--providers.kubernetesIngress.labelSelector=environment=devel"
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetescrd.labelSelector=environment=devel"
+          content: "--providers.kubernetesCRD.labelSelector=environment=devel"
   - it: should match ingresses based on ingressClass
     set:
       providers:
@@ -229,10 +229,10 @@ tests:
     asserts:
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetescrd.ingressClass=foo"
+          content: "--providers.kubernetesCRD.ingressClass=foo"
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetesingress.ingressClass=foo"
+          content: "--providers.kubernetesIngress.ingressClass=foo"
   - it: should be possible to set nativeLBByDefault
     set:
       providers:
@@ -243,18 +243,18 @@ tests:
     asserts:
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetescrd.nativeLBByDefault=true"
+          content: "--providers.kubernetesCRD.nativeLBByDefault=true"
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetesingress.nativeLBByDefault=true"
+          content: "--providers.kubernetesIngress.nativeLBByDefault=true"
   - it: should not set nativeLBByDefault by default
     asserts:
       - notContains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetescrd.nativeLBByDefault=true"
+          content: "--providers.kubernetesCRD.nativeLBByDefault=true"
       - notContains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetesingress.nativeLBByDefault=true"
+          content: "--providers.kubernetesIngress.nativeLBByDefault=true"
   - it: should be possible to set strictPrefixMatching
     set:
       providers:
@@ -263,7 +263,7 @@ tests:
     asserts:
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetesingress.strictPrefixMatching=true"
+          content: "--providers.kubernetesIngress.strictPrefixMatching=true"
 
   - it: should have a plugin storage and args if the experimental feature is enabled
     set:
@@ -632,18 +632,18 @@ tests:
     asserts:
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetescrd.namespaces=ns1,ns2"
+          content: "--providers.kubernetesCRD.namespaces=ns1,ns2"
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetesingress.namespaces=ns3,ns4"
+          content: "--providers.kubernetesIngress.namespaces=ns3,ns4"
   - it: should not set namespace on providers by default
     asserts:
       - notContains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetescrd.namespaces=NAMESPACE"
+          content: "--providers.kubernetesCRD.namespaces=NAMESPACE"
       - notContains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetesingress.namespaces=NAMESPACE"
+          content: "--providers.kubernetesIngress.namespaces=NAMESPACE"
   - it: should have forwardedHeaders and proxyProtocol trustedIPs configuration args when specified in values.yaml for port
     set:
       ports:
@@ -813,7 +813,7 @@ tests:
     asserts:
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetesingress.disableIngressClassLookup=true"
+          content: "--providers.kubernetesIngress.disableIngressClassLookup=true"
   - it: should not set disableIngressClassLookup if version is >= v3.1.5+ and rbac are namespaced
     set:
       rbac:
@@ -823,11 +823,11 @@ tests:
     asserts:
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetesingress.disableClusterScopeResources=true"
+          content: "--providers.kubernetesIngress.disableClusterScopeResources=true"
 
       - notContains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetesingress.disableIngressClassLookup=true"
+          content: "--providers.kubernetesIngress.disableIngressClassLookup=true"
   - it: should set disableIngressClassLookup if version is < v3.1.5+ and rbac are namespaced
     set:
       rbac:
@@ -837,10 +837,10 @@ tests:
     asserts:
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetesingress.disableClusterScopeResources=true"
+          content: "--providers.kubernetesIngress.disableClusterScopeResources=true"
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetesingress.disableIngressClassLookup=true"
+          content: "--providers.kubernetesIngress.disableIngressClassLookup=true"
   - it: should set disableClusterScopeResources when version > v3.1.2+ on both providers
     set:
       rbac:
@@ -850,10 +850,10 @@ tests:
     asserts:
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetesingress.disableClusterScopeResources=true"
+          content: "--providers.kubernetesIngress.disableClusterScopeResources=true"
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetescrd.disableClusterScopeResources=true"
+          content: "--providers.kubernetesCRD.disableClusterScopeResources=true"
   - it: should set disableClusterScopeResources when version > v3.1.2+ only on crd enabled provider
     set:
       rbac:
@@ -866,7 +866,7 @@ tests:
     asserts:
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetescrd.disableClusterScopeResources=true"
+          content: "--providers.kubernetesCRD.disableClusterScopeResources=true"
   - it: should set disableClusterScopeResources when version > v3.1.2+ only on ingress enabled provider
     set:
       rbac:
@@ -879,7 +879,7 @@ tests:
     asserts:
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--providers.kubernetesingress.disableClusterScopeResources=true"
+          content: "--providers.kubernetesIngress.disableClusterScopeResources=true"
   - it: kubernetesGateway should be able to watch specified namespaces
     set:
       providers:
