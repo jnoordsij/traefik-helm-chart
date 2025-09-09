@@ -766,22 +766,22 @@ tests:
     asserts:
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--accesslog=true"
+          content: "--accessLog=true"
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--accesslog.format=json"
+          content: "--accessLog.format=json"
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--accesslog.filepath=/data/log"
+          content: "--accessLog.filePath=/data/log"
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--accesslog.bufferingsize=100"
+          content: "--accessLog.bufferingSize=100"
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--accesslog.addinternals"
+          content: "--accessLog.addInternals"
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--accesslog.filters.statuscodes=200,300-302"
+          content: "--accessLog.filters.statusCodes=200,300-302"
   - it: should set custom startupProbe
     set:
       startupProbe:

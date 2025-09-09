@@ -688,40 +688,40 @@
              {{- include "traefik.oltpCommonParams" (dict "path" "log.otlp" "oltp" .) | nindent 8 }}
             {{- end }}
             {{- if .access.enabled }}
-          - "--accesslog=true"
+          - "--accessLog=true"
               {{- with .access.format }}
-          - "--accesslog.format={{ . }}"
+          - "--accessLog.format={{ . }}"
               {{- end }}
               {{- with .access.filePath }}
-          - "--accesslog.filepath={{ . }}"
+          - "--accessLog.filePath={{ . }}"
               {{- end }}
               {{- if .access.addInternals }}
-          - "--accesslog.addinternals"
+          - "--accessLog.addInternals"
               {{- end }}
               {{- with .access.bufferingSize }}
-          - "--accesslog.bufferingsize={{ . }}"
+          - "--accessLog.bufferingSize={{ . }}"
               {{- end }}
               {{- if .access.timezone }}
-          - "--accesslog.fields.names.StartUTC=drop"
+          - "--accessLog.fields.names.StartUTC=drop"
               {{- end }}
               {{- with .access.filters }}
                 {{- with .statuscodes }}
-          - "--accesslog.filters.statuscodes={{ . }}"
+          - "--accessLog.filters.statusCodes={{ . }}"
                 {{- end }}
                 {{- if .retryattempts }}
-          - "--accesslog.filters.retryattempts"
+          - "--accessLog.filters.retryAttempts"
                 {{- end }}
                 {{- with .minduration }}
-          - "--accesslog.filters.minduration={{ . }}"
+          - "--accessLog.filters.minduration={{ . }}"
                 {{- end }}
               {{- end }}
-          - "--accesslog.fields.defaultmode={{ .access.fields.general.defaultmode }}"
+          - "--accessLog.fields.defaultMode={{ .access.fields.general.defaultmode }}"
               {{- range $fieldname, $fieldaction := .access.fields.general.names }}
-          - "--accesslog.fields.names.{{ $fieldname }}={{ $fieldaction }}"
+          - "--accessLog.fields.names.{{ $fieldname }}={{ $fieldaction }}"
               {{- end }}
-          - "--accesslog.fields.headers.defaultmode={{ .access.fields.headers.defaultmode }}"
+          - "--accessLog.fields.headers.defaultMode={{ .access.fields.headers.defaultmode }}"
               {{- range $fieldname, $fieldaction := .access.fields.headers.names }}
-          - "--accesslog.fields.headers.names.{{ $fieldname }}={{ $fieldaction }}"
+          - "--accessLog.fields.headers.names.{{ $fieldname }}={{ $fieldaction }}"
               {{- end }}
               {{- with .access.otlp }}
                 {{- include "traefik.oltpCommonParams" (dict "path" "accesslog.otlp" "oltp" .) | nindent 8 }}

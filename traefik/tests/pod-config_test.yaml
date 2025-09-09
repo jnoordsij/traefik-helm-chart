@@ -922,7 +922,7 @@ tests:
     asserts:
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--accesslog.format=genericCLF"
+          content: "--accessLog.format=genericCLF"
   - it: should fail on schema level when trying to set genericCLF log format
     set:
       logs:
@@ -989,7 +989,7 @@ tests:
             value: US/Alaska
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--accesslog.fields.names.StartUTC=drop"
+          content: "--accessLog.fields.names.StartUTC=drop"
   - it: "should set traefik as user in env by default"
     asserts:
       - contains:
