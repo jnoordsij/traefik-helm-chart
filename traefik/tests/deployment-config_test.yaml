@@ -251,11 +251,11 @@ tests:
             - --ping=true
             - --metrics.prometheus=true
             - --metrics.prometheus.entryPoint=metrics
-            - --providers.kubernetescrd
-            - --providers.kubernetescrd.allowEmptyServices=true
-            - --providers.kubernetesingress
-            - --providers.kubernetesingress.allowEmptyServices=true
-            - --providers.kubernetesingress.ingressendpoint.publishedservice=NAMESPACE/RELEASE-NAME-traefik
+            - --providers.kubernetesCRD
+            - --providers.kubernetesCRD.allowEmptyServices=true
+            - --providers.kubernetesIngress
+            - --providers.kubernetesIngress.allowEmptyServices=true
+            - --providers.kubernetesIngress.ingressEndpoint.publishedService=NAMESPACE/RELEASE-NAME-traefik
             - --entryPoints.websecure.http.tls=true
             - --log.level=INFO
       - notContains:
