@@ -250,7 +250,7 @@ tests:
             - --api.dashboard=true
             - --ping=true
             - --metrics.prometheus=true
-            - --metrics.prometheus.entrypoint=metrics
+            - --metrics.prometheus.entryPoint=metrics
             - --providers.kubernetescrd
             - --providers.kubernetescrd.allowEmptyServices=true
             - --providers.kubernetesingress
