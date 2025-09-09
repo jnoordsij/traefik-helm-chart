@@ -19,7 +19,7 @@ tests:
     asserts:
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--metrics.addinternals"
+          content: "--metrics.addInternals"
 
   - it: should have prometheus enabled by default on metrics entrypoint
     asserts:
@@ -28,7 +28,7 @@ tests:
           content: "--metrics.prometheus=true"
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--metrics.prometheus.entrypoint=metrics"
+          content: "--metrics.prometheus.entryPoint=metrics"
   - it: should enable/disable labels on prometheus if set
     set:
       metrics:
@@ -80,7 +80,7 @@ tests:
     asserts:
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--metrics.prometheus.manualrouting=true"
+          content: "--metrics.prometheus.manualRouting=true"
   - it: should be possible to enable datadog and disable prometheus
     set:
       metrics:
@@ -93,7 +93,7 @@ tests:
           content: "--metrics.prometheus=true"
       - notContains:
           path: spec.template.spec.containers[0].args
-          content: "--metrics.prometheus.entrypoint=metrics"
+          content: "--metrics.prometheus.entryPoint=metrics"
       - contains:
           path: spec.template.spec.containers[0].args
           content: "--metrics.datadog=true"
@@ -415,7 +415,7 @@ tests:
     asserts:
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--metrics.prometheus.headerlabels.user_id=X-User-Id"
+          content: "--metrics.prometheus.headerLabels.user_id=X-User-Id"
       - contains:
           path: spec.template.spec.containers[0].args
-          content: "--metrics.prometheus.headerlabels.tenant=X-Tenant"
+          content: "--metrics.prometheus.headerLabels.tenant=X-Tenant"

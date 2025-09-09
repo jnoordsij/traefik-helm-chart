@@ -228,7 +228,7 @@
 
           {{- if .Values.metrics }}
           {{- if .Values.metrics.addInternals }}
-          - "--metrics.addinternals"
+          - "--metrics.addInternals"
           {{- end }}
           {{- with .Values.metrics.datadog }}
           - "--metrics.datadog=true"
@@ -288,7 +288,7 @@
           {{- end }}
           {{- if (.Values.metrics.prometheus) }}
           - "--metrics.prometheus=true"
-          - "--metrics.prometheus.entrypoint={{ .Values.metrics.prometheus.entryPoint }}"
+          - "--metrics.prometheus.entryPoint={{ .Values.metrics.prometheus.entryPoint }}"
           {{- if (eq (.Values.metrics.prometheus.addRoutersLabels | toString) "true") }}
           - "--metrics.prometheus.addRoutersLabels=true"
           {{- end }}
@@ -306,11 +306,11 @@
           - "--metrics.prometheus.buckets={{ .Values.metrics.prometheus.buckets }}"
           {{- end }}
           {{- if .Values.metrics.prometheus.manualRouting }}
-          - "--metrics.prometheus.manualrouting=true"
+          - "--metrics.prometheus.manualRouting=true"
           {{- end }}
           {{- if .Values.metrics.prometheus.headerLabels }}
           {{- range $label, $headerKey := .Values.metrics.prometheus.headerLabels }}
-          - "--metrics.prometheus.headerlabels.{{ $label }}={{ $headerKey }}"
+          - "--metrics.prometheus.headerLabels.{{ $label }}={{ $headerKey }}"
           {{- end }}
           {{- end }}
           {{- end }}
